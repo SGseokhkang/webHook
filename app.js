@@ -6,26 +6,44 @@ const app = express();
 
 app.use(bodyParser.json());
 
-// 웹훅 리스너 엔드포인트
-app.post('/figma-webhook', (req, res) => {
-    // 피그마에서 받은 데이터 확인
-    const data = req.body;
-    console.log("Received data from Figma:", data);
-    console.log("Received data from Figma:", data.content);
+// // 보안을 위해 노출되면 안 되는 키 값들은 환경 변수나 별도의 설정 파일에서 가져와야 합니다.
+// const FIGMA_API_TOKEN = process.env.FIGMA_API_TOKEN || 'YOUR_DEFAULT_FIGMA_API_KEY';
+// const FILE_ID = process.env.FILE_ID || 'YOUR_DEFAULT_FILE_ID';
+// cloudtype
 
-    // 특정 이벤트에 따른 처리 (이 예시에서는 모든 이벤트에 반응)
-    post_data_to_smilegate(data);
+// 보안을 위해 노출되면 안 되는 키 값들은 환경 변수나 별도의 설정 파일에서 가져와야 합니다.
+const FIGMA_API_TOKEN = process.env.FIGMA_API_TOKEN || 'figd_6n2fAdrTNeNqiwtM4RA3wOkGHXmhVxt-pT9O-Z6m';
+const FILE_ID = process.env.FILE_ID || 'O4jSSRxzFAcHRKrSFOSZmh';
 
-    res.json({status: "success"});
+
+axios.defaults.headers.common['Authorization'] = `Bearer ${FIGMA_API_TOKEN}`;
+
+app.post('/figma-webhook', async (req, res) => {
+    try {
+        const response = await axios.get(`https://api.figma.com/v1/files/${FILE_ID}/comments`);
+        const comments = response.data.data.comments;
+
+        for (let comment of comments) {
+            console.log(`User: ${comment.user.handle}`);
+            console.log(`Comment: ${comment.message}`);
+            console.log('-------------------');
+            post_data_to_smilegate(comment); // 각 댓글을 Smilegate로 전송
+        }
+
+        res.send('Comments fetched and posted!');
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).send('Error occurred');
+    }
 });
 
-function post_data_to_smilegate(data) {
-    const url = "https://schat.smilegate.net/hooks/64e477d6892ec40472d71732/rjDH9MFQpPzFsjvQazM5764Co8CW2iQzZfFi6TqpuWud6NAE";
+function post_data_to_smilegate(comment) {
+    const url = "https://schat.smilegate.net/hooks/YOUR_HOOK_ID";
     const json_body = {
-        "text": `${data.content}`,
+        "text": `${comment.message}`,
         "attachments": [
             {
-                "title": `${data.content}`,
+                "title": `${comment.message}`,
                 "title_link": "https://schat.smilegate.net",
                 "text": `testㅇ`,
                 "image_url": "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",

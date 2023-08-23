@@ -38,7 +38,7 @@ app.post('/figma-webhook', async (req, res) => {
 });
 
 function post_data_to_smilegate(comment) {
-    const url = "https://schat.smilegate.net/hooks/YOUR_HOOK_ID";
+    const url = "https://schat.smilegate.net/hooks/64e5a520840cf4465cd881a0/WJTTqdN6s4eo7Q2ekC32WwjoWyWBPwMKX9xTb6wb5LiM5Q58";
     const json_body = {
         "text": `${comment.message}`,
         "attachments": [

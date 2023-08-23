@@ -27,7 +27,7 @@ function post_data_to_smilegate(data) {
             {
                 "title": `${data.content}`,
                 "title_link": "https://schat.smilegate.net",
-                "text": `${data.content}`,
+                "text": `test`,
                 "image_url": "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
                 "color": "#764FA5"
             }

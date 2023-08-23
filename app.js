@@ -12,8 +12,8 @@ app.use(bodyParser.json());
 // cloudtype
 
 // 보안을 위해 노출되면 안 되는 키 값들은 환경 변수나 별도의 설정 파일에서 가져와야 합니다.
-const FIGMA_API_TOKEN = process.env.FIGMA_API_TOKEN || 'figd_6n2fAdrTNeNqiwtM4RA3wOkGHXmhVxt-pT9O-Z6m';
-const FILE_ID = process.env.FILE_ID || 'O4jSSRxzFAcHRKrSFOSZmh';
+const FIGMA_API_TOKEN = 'figd_6n2fAdrTNeNqiwtM4RA3wOkGHXmhVxt-pT9O-Z6m';
+const FILE_ID = 'O4jSSRxzFAcHRKrSFOSZmh';
 
 
 axios.defaults.headers.common['Authorization'] = `Bearer ${FIGMA_API_TOKEN}`;

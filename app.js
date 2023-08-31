@@ -30,7 +30,7 @@ async function checkFigmaComments(lastCommentId = null) {
       const url = "https://schat.smilegate.net/hooks/64e477d6892ec40472d71732/rjDH9MFQpPzFsjvQazM5764Co8CW2iQzZfFi6TqpuWud6NAE";
 
       const payload = {
-          text: `${latestComment.message}`,
+          text: `[${latestComment.user.handle}]:${latestComment.message}`,
           attachments: [
               {
                   title: `[${latestComment.user.handle}]:${latestComment.message}`,

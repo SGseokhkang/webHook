@@ -1,67 +1,71 @@
-const express = require('express');
-const axios = require('axios');
-const bodyParser = require('body-parser');
-
+const axios = require("axios");
+const express = require("express");
 const app = express();
+const port = 3000;
 
-app.use(bodyParser.json());
+// Figma 파일 ID와 개인 엑세스 토큰을 설정합니다.
+const figmaFileId = "oOsVn88SOLqm7uksrqQo3w";
+const personalAccessToken = "figd_Jgkpc3nYhU8lUb91iTr8tVHyiu0vc5qwFaD1S9U6";
 
-// // 보안을 위해 노출되면 안 되는 키 값들은 환경 변수나 별도의 설정 파일에서 가져와야 합니다.
-// const FIGMA_API_TOKEN = process.env.FIGMA_API_TOKEN || 'YOUR_DEFAULT_FIGMA_API_KEY';
-// const FILE_ID = process.env.FILE_ID || 'YOUR_DEFAULT_FILE_ID';
-// cloudtype
+async function checkFigmaComments(lastCommentId = null) {
+  try {
+    // Figma API를 사용하여 코멘트를 불러옵니다.
+    const response = await axios.get(`https://api.figma.com/v1/files/${figmaFileId}/comments`, {
+      headers: {
+        "X-Figma-Token": personalAccessToken,
+      },
+    });
+    const comments = response.data.comments;
 
-// 보안을 위해 노출되면 안 되는 키 값들은 환경 변수나 별도의 설정 파일에서 가져와야 합니다.
-const FIGMA_API_TOKEN = 'figd_6n2fAdrTNeNqiwtM4RA3wOkGHXmhVxt-pT9O-Z6m';
-const FILE_ID = 'O4jSSRxzFAcHRKrSFOSZmh';
-
-
-axios.defaults.headers.common['Authorization'] = `Bearer ${FIGMA_API_TOKEN}`;
-
-app.post('/figma-webhook', async (req, res) => {
-    try {
-        const response = await axios.get(`https://api.figma.com/v1/files/${FILE_ID}/comments`);
-        const comments = response.data.data.comments;
-
-        for (let comment of comments) {
-            console.log(`User: ${comment.user.handle}`);
-            console.log(`Comment: ${comment.message}`);
-            console.log('-------------------');
-            post_data_to_smilegate(comment); // 각 댓글을 Smilegate로 전송
-        }
-
-        res.send('Comments fetched and posted!');
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(500).send('Error occurred');
+    if (comments.length === 0) {
+      return;
     }
-});
 
-function post_data_to_smilegate(comment) {
-    const url = "https://schat.smilegate.net/hooks/64e5a520840cf4465cd881a0/WJTTqdN6s4eo7Q2ekC32WwjoWyWBPwMKX9xTb6wb5LiM5Q58";
-    const json_body = {
-        "text": `${comment.message}`,
-        "attachments": [
-            {
-                "title": `${comment.message}`,
-                "title_link": "https://schat.smilegate.net",
-                "text": `testㅇ`,
-                "image_url": "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
-                "color": "#764FA5"
-            }
-        ]
-    };
+    // 새로운 코멘트가 있는지 확인합니다.
+    const latestComment = comments[0];
+    if (latestComment.id !== lastCommentId) {
+      console.log("새로운 코멘트 감지:", latestComment.message);
 
-    axios.post(url, json_body)
-        .then(response => {
-            console.log("Response from Smilegate:", response.data);
-        })
-        .catch(error => {
-            console.error("Error posting to Smilegate:", error);
-        });
+      const url = "https://schat.smilegate.net/hooks/64e477d6892ec40472d71732/rjDH9MFQpPzFsjvQazM5764Co8CW2iQzZfFi6TqpuWud6NAE";
+
+      const payload = {
+          text: `${latestComment.message}`,
+          attachments: [
+              {
+                  title: `${latestComment.message}`,
+                  title_link: "https://schat.smilegate.net",
+                  text: "첨부 파일의 본문 영역입니다. 첨부파일도 추가하여 보낼 수 있습니다.",
+                  image_url: "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
+                  color: "#764FA5"
+              }
+          ]
+      };
+      
+      axios.post(url, payload, {
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      })
+      .then((response) => {
+          console.log('성공:', response.data);
+      })
+      .catch((error) => {
+          console.error('에러:', error);
+      });
+      return latestComment.id;
+    }
+  } catch (error) {
+    console.error("Figma API 요청에 실패했습니다:", error);
+  }
+  return lastCommentId;
 }
 
-const PORT = 5000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+// 주기적으로 Figma 코멘트를 체크합니다.
+let lastCommentId = null;
+setInterval(async () => {
+  lastCommentId = await checkFigmaComments(lastCommentId);
+}, 5000); // 5초마다 체크
+
+app.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`);
 });

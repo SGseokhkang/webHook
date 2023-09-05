@@ -4,9 +4,9 @@ const path = require("path");
 const app = express();
 const port = 3000;
 
-let latestComment = "No comments yet.";
-
 app.use(express.json());  // JSON 파싱 미들웨어 추가
+
+let latestComment = "No comments yet.";
 
 // 웹훅 엔드포인트 설정
 app.post('/webhook-ppool', (req, res) => {
@@ -15,12 +15,18 @@ app.post('/webhook-ppool', (req, res) => {
   if (passcode === 'ppool12345') {
     // 웹훅 로직 처리
     console.log('Received Figma event:', req.body);
-    latestComment = req.body ? req.body : "No comment data found.";
+    if (req.body && req.body.comment) {
+      // 코멘트를 하나의 문자열로 합칩니다.
+      latestComment = req.body.comment.map(item => item.text || `[Mention: ${item.mention}]`).join(' ');
+    } else {
+      latestComment = "No comment data found.";
+    }
     res.status(200).send('OK');
   } else {
     res.status(401).send('Unauthorized');
   }
 });
+
 
 // 웹 페이지 라우팅
 app.get('/', (req, res) => {

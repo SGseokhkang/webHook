@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Figma Comments</title>
+  <script>
+    async function fetchLatestComment() {
+      const response = await fetch('/latest-comment');
+      const data = await response.json();
+      alert("Latest comment: " + data.comment);
+    }
+  </script>
+</head>
+<body>
+  <h1>Figma Comments</h1>
+  <button onclick="fetchLatestComment()">Show Latest Comment</button>
+  <button onclick="fetchLatestComment()">Show Latest Comment</button>
+</body>
+</html>

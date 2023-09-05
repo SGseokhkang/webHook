@@ -4,9 +4,6 @@ const app = express();
 const port = 3000;
 
 // Figma 파일 ID와 개인 엑세스 토큰을 설정합니다.
-const figmaFileId = "oOsVn88SOLqm7uksrqQo3w";
-const personalAccessToken = "figd_Jgkpc3nYhU8lUb91iTr8tVHyiu0vc5qwFaD1S9U6";
-
 async function checkFigmaComments(lastCommentId = null) {
   try {
     // Figma API를 사용하여 코멘트를 불러옵니다.

@@ -16,7 +16,12 @@
       const data = await res.json();
       document.getElementById('webhookLogs').innerText = JSON.stringify(data, null, 2);
     }
+    
+    let webhookget = document.getElementById('webhookLogs');
+    webhookget.addEventListener('click', function() {
+      fetchWebhookLogs();
+    });
 
-    fetchWebhookLogs();  // 웹훅 로그를 가져옵니다.
-
-    // 
+  </script>
+</body>
+</html>

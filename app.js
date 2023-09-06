@@ -18,17 +18,12 @@ app.get('/webhook-logs', async (req, res) => {
         'X-FIGMA-TOKEN': figmaToken,
       },
     });
-    res.json(response.data);
+
+    const requests = response.data.requests;
+    const lastRequest = requests[requests.length - 1];  // 배열의 마지막 요소
+
+    res.json(lastRequest);  // 마지막 요소만 응답으로 보냅니다
   } catch (error) {
     res.status(500).json({ error: error.toString() });
   }
-});
-
-// 웹 페이지 라우팅
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
 });

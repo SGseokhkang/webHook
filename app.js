@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
 
 // 웹 페이지에서 사용할 최신 코멘트를 제공하는 API
 app.get('/webhook-ppool', (req, res) => {
-  res.json({ comment: latestComment, passcode:passcode });
+  res.json({ comment: latestComment});
 });
 
 app.listen(port, () => {

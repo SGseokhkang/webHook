@@ -1,19 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
   <title>Figma Comments</title>
-  <script>
-    async function fetchLatestComment() {
-      const response = await fetch('/latest-comment');
-      const data = await response.json();
-      alert("Latest comment: " + data.comment);
-    }
-  </script>
 </head>
 <body>
-  <h1>Figma Comments</h1>
-  <button onclick="fetchLatestComment()">Show Latest Comment</button>
-  <button onclick="fetchLatestComment()">Show Latest Comment</button>
+  <h1>Latest Figma Comment</h1>
+  <div id="commentBox">Loading...</div>
+
+  <script>
+    // 페이지가 로드되면 서버에 최신 코멘트를 요청합니다.
+    async function fetchLatestComment() {
+      const res = await fetch('/webhook-ppool');
+      const data = await res.json();
+      document.getElementById('commentBox').innerText = data.comment;
+
+      // 코멘트가 변경되면 알림을 표시합니다.
+      alert(`New comment: ${data.comment}`);
+    }
+
+    fetchLatestComment();
+    // 5초마다 새 코멘트가 있는지 확인합니다.
+    setInterval(fetchLatestComment, 5000);
+  </script>
 </body>
 </html>

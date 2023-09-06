@@ -11,7 +11,7 @@ let latestComment = "No comments yet.";
 // 웹훅 엔드포인트 설정
 app.post('/webhook-ppool', (req, res) => {
   const passcode = req.headers['x-figma-passcode'];
-
+  console.log('Received passcode:', passcode);
   if (passcode === 'ppool12345') {
     // 웹훅 로직 처리
     console.log('Received Figma event:', req.body);
@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
 
 // 웹 페이지에서 사용할 최신 코멘트를 제공하는 API
 app.get('/webhook-ppool', (req, res) => {
-  res.json({ comment: latestComment });
+  res.json({ comment: latestComment, passcode });
 });
 
 app.listen(port, () => {

@@ -17,7 +17,7 @@
       // 코멘트가 변경되면 알림을 표시합니다.
       alert(`New comment: ${data.comment}`);
     }
-
+    console.log('Received passcode:', passcode);
     fetchLatestComment();
     // 5초마다 새 코멘트가 있는지 확인합니다.
     setInterval(fetchLatestComment, 5000);

@@ -27,3 +27,13 @@ app.get('/webhook-logs', async (req, res) => {
     res.status(500).json({ error: error.toString() });
   }
 });
+
+
+// 웹 페이지 라우팅
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`);
+});

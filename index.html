@@ -4,22 +4,19 @@
   <title>Figma Comments</title>
 </head>
 <body>
-  <h1>Latest Figma Comment</h1>
-  <div id="commentBox">Loading...</div>
+
+  <h2>Figma Webhook Logs</h2>
+  <div id="webhookLogs">Loading...</div>
 
   <script>
-    // 페이지가 로드되면 서버에 최신 코멘트를 요청합니다.
-    async function fetchLatestComment() {
-      const res = await fetch('/webhook-ppool');
-      const data = await res.json();
-      console.log(data);
-      document.getElementById('commentBox').innerText = data.comment;
 
-      // 코멘트가 변경되면 알림을 표시합니다.
-      alert(`New comment: ${data.comment}`);
+    // 웹훅 로그를 가져옵니다.
+    async function fetchWebhookLogs() {
+      const res = await fetch('/webhook-logs');
+      const data = await res.json();
+      document.getElementById('webhookLogs').innerText = JSON.stringify(data, null, 2);
     }
-    fetchLatestComment();
-    // 5초마다 새 코멘트가 있는지 확인합니다.
-  </script>
-</body>
-</html>
+
+    fetchWebhookLogs();  // 웹훅 로그를 가져옵니다.
+
+    // 

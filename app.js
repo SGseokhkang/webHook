@@ -15,7 +15,7 @@ app.post('/webhook-library', async (req, res) => {
     console.log('Figma 이벤트를 받았습니다:', req.body);
     latestLibraryData = req.body;  // 웹훅 데이터 저장
     
-    const libraryComponents = req.body.created_components;
+    // const libraryComponents = req.body.created_components;
     const libraryPostID = req.body.triggered_by.handle;
 
      // Webhook URL로 데이터 전송
@@ -25,7 +25,7 @@ app.post('/webhook-library', async (req, res) => {
          attachments: [{
              title: "라이브러리",
              title_link: "https://schat.smilegate.net",
-             text: libraryComponents,
+             text: 'test',
              color: "#111111"
          }]
      };

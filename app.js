@@ -31,7 +31,7 @@ app.post('/', (req, res) => {
 });
 
 // 최신 웹훅 데이터를 가져오는 엔드포인트
-app.get('/', (req, res) => {
+app.get('/webhook', (req, res) => {
     res.json(latestWebhookData);
 });
 

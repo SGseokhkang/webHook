@@ -7,21 +7,19 @@
 
   <h2>Figma Webhook Logs</h2>
   <div id="webhookLogs">Loading...</div>
+  <h3>Latest Webhook Data</h3>
+  <pre id="latestWebhookData">Fetching...</pre>
 
   <script>
 
-    // 웹훅 로그를 가져옵니다.
-    async function fetchWebhookLogs() {
-      const res = await fetch('/webhook-logs');
+    // 최신 웹훅 데이터를 가져옵니다.
+    async function fetchLatestWebhookData() {
+      const res = await fetch('/latest-webhook-data');
       const data = await res.json();
-      document.getElementById('webhookLogs').innerText = JSON.stringify(data, null, 2);
+      document.getElementById('latestWebhookData').innerText = JSON.stringify(data, null, 2);
     }
-    
-    let webhookget = document.getElementById('webhookLogs');
-    webhookget.addEventListener('click', function() {
-      fetchWebhookLogs();
-    });
 
+    fetchLatestWebhookData();  // 페이지 로드시 최초로 웹훅 데이터 가져오기
   </script>
 </body>
 </html>

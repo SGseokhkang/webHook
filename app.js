@@ -3,17 +3,21 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const port = 3000;
+const config = require('./config');
+
+console.log(`Webhook ID: ${config.webhookId}`);
+console.log(`Figma Token: ${config.figmaToken}`);
 
 app.use(express.json());
 
 let latestComment = "No comments yet.";
 
 // 웹훅 로그 가져오기
-app.get('/webhook-logs', async (req, res) => {
+app.get('/webhook-ppool', async (req, res) => {
   try {
     const webhookId = "577584";  // 웹훅 아이디
     const figmaToken = "figd_Do-_y5XpGO6REo9QYHI3rGJ-DFb6EnWkONYnc1HH";  // Figma 토큰
-    const response = await axios.get(`https://api.figma.com/v2/webhooks/${webhookId}/requests`, {
+    const response = await axios.get(`https://api.figma.com/v2/webhooks/:${webhookId}`, {
       headers: {
         'X-FIGMA-TOKEN': figmaToken,
       },

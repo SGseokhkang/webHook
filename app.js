@@ -9,7 +9,18 @@ app.use(express.json());
 let latestComment = "No comments yet.";
 let latestWebhookData = {};  // 웹훅 데이터를 저장하기 위한 변수
 
-// 웹훅 엔드포인트 설정
+// 웹훅 라이브러리
+app.post('/webhook-library', (req, res) => {
+
+    console.log('Received Figma event:', req.body);
+    latestLibraryData = req.body;  // 웹훅 데이터 저장
+
+    res.status(200).send('OK');
+
+});
+
+
+// 웹훅 댓글
 app.post('/webhook-ppool', (req, res) => {
 
         console.log('Received Figma event:', req.body);
@@ -29,6 +40,10 @@ app.post('/webhook-ppool', (req, res) => {
 // 최신 웹훅 데이터를 가져오는 엔드포인트
 app.get('/webhook', (req, res) => {
     res.json(latestWebhookData);
+});
+
+app.get('/webhook-library', (req, res) => {
+    res.json(latestLibraryData);
 });
 
 // 웹 페이지 라우팅

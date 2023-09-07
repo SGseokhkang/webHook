@@ -9,6 +9,8 @@
   <div id="webhookLogs">Loading...</div>
   <h3>Latest Webhook Data</h3>
   <pre id="latestWebhookData">Fetching...</pre>
+  <h3>Latest Webhook library Data</h3>
+  <pre id="latestWebhookLibraryData">Fetching...</pre>
 
   <script>
 
@@ -20,7 +22,16 @@
       console.log(data);
     }
 
+        // 최신 웹훅 데이터를 가져옵니다.
+        async function fetchLatestWebhookLibraryData() {
+      const res = await fetch('/webhook-library');
+      const data = await res.json();
+      document.getElementById('latestWebhookLibraryData').innerText = JSON.stringify(data, null, 2);
+      console.log(data);
+    }
+
     fetchLatestWebhookData();  // 페이지 로드시 최초로 웹훅 데이터 가져오기
+    fetchLatestWebhookLibraryData();
   </script>
 </body>
 </html>

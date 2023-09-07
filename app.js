@@ -29,17 +29,16 @@ app.post('/webhook-ppool', async (req, res) => {
         // "게시자 ID" 값을 가져옵니다.
         const postID = req.body.triggered_by.handle;
         const postFile = req.body.file_name;
-        const postContent = req.body.comment;
+        const postContent = req.body.comment.map(item => item.text).join(' '); // 댓글 내용을 하나의 문자열로 합칩니다.
 
         // Webhook URL로 데이터 전송
         const webhookUrl = 'https://schat.smilegate.net/hooks/64e477d6892ec40472d71732/rjDH9MFQpPzFsjvQazM5764Co8CW2iQzZfFi6TqpuWud6NAE';
         const postData = {
-            text: `게시자 ID : ${postID} 님이 파일명: ${postFile}에 댓글을 남겼습니다.`,
+            text: `게시자 ID: ${postID} 님이 파일명: ${postFile}에 댓글을 남겼습니다.`,
             attachments: [{
                 title: postContent,
                 title_link: "https://schat.smilegate.net",
-                text: postContent, // 이 부분을 원하는 데이터로 수정하세요.
-                // image_url: "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
+                text: postContent,
                 color: "#111111"
             }]
         };
@@ -51,9 +50,6 @@ app.post('/webhook-ppool', async (req, res) => {
                 }
             });
             console.log('웹훅으로 데이터를 보냈습니다:', response.data);
-
-            // handle 값을 출력합니다.
-            console.log('handle 값:', handle);
         } catch (error) {
             console.error('웹훅으로 데이터를 보내는 중 오류가 발생했습니다:', error);
         }
@@ -63,6 +59,7 @@ app.post('/webhook-ppool', async (req, res) => {
 
     res.status(200).send('OK');
 });
+
 
 
 // 최신 웹훅 데이터를 가져오는 엔드포인트

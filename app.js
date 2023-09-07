@@ -19,7 +19,7 @@ app.post('/webhook-library', async (req, res) => {
     const libraryPostID = req.body.triggered_by.handle;
 
      // Webhook URL로 데이터 전송
-     const webhookUrl = 'https://schat.smilegate.net/hooks/64e477d6892ec40472d71732/rjDH9MFQpPzFsjvQazM5764Co8CW2iQzZfFi6TqpuWud6NAE';
+     const webhookUrl = 'https://schat.smilegate.net/hooks/64f98e7775ee54f9c3fe6491/y6RQ9GY9KFd6ttQWrjHPYigX8czX6Pey8aymQzmkqthwANsE';
      const postData = {
          text: `게시자 ID: ${libraryPostID} 님이 ppool 라이브러리를 Publish 했습니다.`,
          attachments: [{

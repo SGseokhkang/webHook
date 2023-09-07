@@ -10,10 +10,8 @@ let latestComment = "No comments yet.";
 let latestWebhookData = {};  // 웹훅 데이터를 저장하기 위한 변수
 
 // 웹훅 엔드포인트 설정
-app.post('/', (req, res) => {
-    const passcode = req.headers['x-figma-passcode'];
+app.post('/webhook-ppool', (req, res) => {
 
-    if (passcode === 'ppool12345') {  // 설정한 passcode와 일치하는지 확인
         console.log('Received Figma event:', req.body);
         latestWebhookData = req.body;  // 웹훅 데이터 저장
 
@@ -25,9 +23,7 @@ app.post('/', (req, res) => {
         }
 
         res.status(200).send('OK');
-    } else {
-        res.status(401).send('Unauthorized');
-    }
+  
 });
 
 // 최신 웹훅 데이터를 가져오는 엔드포인트

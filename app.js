@@ -27,7 +27,7 @@ app.post('/webhook-ppool', async (req, res) => {
         latestComment = req.body.comment.map(item => item.text || `[Mention: ${item.mention}]`).join(' ');
 
         // Webhook URL로 데이터 전송
-        const webhookUrl = 'https://schat.smilegate.net/hooks/64f9818cac7ea68c73af63d4/bQZNbyma8LabhRGwnzYA3JJRrrJ5YLybkqLMydAHGx5Keynm';
+        const webhookUrl = 'https://schat.smilegate.net/hooks/64e477d6892ec40472d71732/rjDH9MFQpPzFsjvQazM5764Co8CW2iQzZfFi6TqpuWud6NAE';
         const postData = {
             text: "마크다운을 활용하여 메시지 내용을 입력하여 보낼 수 있습니다.",
             attachments: [{

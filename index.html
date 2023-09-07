@@ -14,7 +14,7 @@
 
     // 최신 웹훅 데이터를 가져옵니다.
     async function fetchLatestWebhookData() {
-      const res = await fetch('/latest-webhook-data');
+      const res = await fetch('/');
       const data = await res.json();
       document.getElementById('latestWebhookData').innerText = JSON.stringify(data, null, 2);
       console.log(data);

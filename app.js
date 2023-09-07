@@ -23,9 +23,8 @@ app.post('/webhook-library', (req, res) => {
 // 웹훅 댓글
 app.post('/webhook-ppool', async (req, res) => {
     console.log('Received Figma event:', req.body);
-    const latestWebhookData = req.body;  // 웹훅 데이터 저장
+    const latestComment = req.body;  // 웹훅 데이터 저장
 
-    let latestComment;
     if (req.body && req.body.comment) {
         // 코멘트를 하나의 문자열로 합칩니다.
         latestComment = req.body.comment.map(item => item.text || `[Mention: ${item.mention}]`).join(' ');

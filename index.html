@@ -17,6 +17,7 @@
       const res = await fetch('/latest-webhook-data');
       const data = await res.json();
       document.getElementById('latestWebhookData').innerText = JSON.stringify(data, null, 2);
+      console.log(data);
     }
 
     fetchLatestWebhookData();  // 페이지 로드시 최초로 웹훅 데이터 가져오기

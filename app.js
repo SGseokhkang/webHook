@@ -1,6 +1,7 @@
 const express = require("express");
 const libraryRouter = require("./router/library");
 const ppoolRouter = require("./router/ppool");
+const path = require("path");  // <-- 이 부분 추가
 const app = express();
 const port = 3000;
 

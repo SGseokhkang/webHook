@@ -1,5 +1,5 @@
 const express = require("express");
-const ppoolController = require("../controller/ppool");
+const ppoolController = require("../../controller/ppool/comment");
 const router = express.Router();
 
 router.post('/', ppoolController.webhookPpool);

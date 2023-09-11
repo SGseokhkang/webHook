@@ -6,13 +6,18 @@ exports.webhookPpool = async (req, res) => {
     console.log('Figma 이벤트를 받았습니다:', req.body);
     latestWebhookData = req.body;
 
+    // PING 이벤트 처리 추가
+    if (req.body && req.body.event_type === "PING") {
+        console.log('PING 이벤트를 받았습니다.');
+        return res.status(200).send('PING OK');
+    }
+
     if (req.body && req.body.comment) {
         const postID = req.body.triggered_by.handle;
         const postFile = req.body.file_name;
         const postContent = req.body.comment.map(item => item.text).join(' ');
         const postFileKey = req.body.file_key;
         const postFileURL = `https://www.figma.com/file/${postFileKey}/${postFile}`
-        // const mentionID = req.body.mentions ? req.body.mentions.handle : null;
 
         const webhookUrl = 'https://schat.smilegate.net/hooks/64e477d6892ec40472d71732/rjDH9MFQpPzFsjvQazM5764Co8CW2iQzZfFi6TqpuWud6NAE';
         const postData = {

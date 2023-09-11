@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/webhook-library', libraryRouter);
-app.use('/webhook-ppool', ppoolRouter);
+app.use('/comment-ppool', ppoolRouter);
 
 app.listen(port, () => {
     console.log(`서버가 http://localhost:${port}에서 실행 중입니다.`);

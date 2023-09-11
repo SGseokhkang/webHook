@@ -12,7 +12,7 @@ exports.webhookPpool = async (req, res) => {
         return res.status(200).send('PING OK');
     }
 
-    if (req.body && req.body.comment) {
+    if (req.body) {
         const postID = req.body.triggered_by.handle;
         const postFile = req.body.file_name;
         const postContent = req.body.comment.map(item => item.text).join(' ');

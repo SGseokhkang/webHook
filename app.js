@@ -67,7 +67,7 @@ app.post('/webhook-ppool', async (req, res) => {
         // Webhook URL로 데이터 전송
         const webhookUrl = 'https://schat.smilegate.net/hooks/64e477d6892ec40472d71732/rjDH9MFQpPzFsjvQazM5764Co8CW2iQzZfFi6TqpuWud6NAE';
         const postData = {
-            text: `게시자 ID: ${postID} 님이 파일명: ${postFile}에 댓글을 남겼습니다.`,
+            text: `${postID} 님이 ${postFile}에 댓글을 남겼습니다.`,
             attachments: [{
                 // mentionID가 null이 아닌 경우에만 "@"를 붙여 표시합니다.
                 // title: mentionID ? `@${mentionID} ${postContent}` : postContent,

@@ -45,7 +45,6 @@ app.post('/webhook-library', async (req, res) => {
     res.status(200).send('OK');
 });
 
-// 웹훅 댓글
 app.post('/webhook-ppool', async (req, res) => {
     console.log('Figma 이벤트를 받았습니다:', req.body);
     latestWebhookData = req.body;  // 웹훅 데이터 저장
@@ -58,14 +57,17 @@ app.post('/webhook-ppool', async (req, res) => {
         const postID = req.body.triggered_by.handle;
         const postFile = req.body.file_name;
         const postContent = req.body.comment.map(item => item.text).join(' '); // 댓글 내용을 하나의 문자열로 합칩니다.
-        const mentionID = req.body.metions.handle;
+        
+        // "mentionID"를 가져옵니다. mentionID가 null인 경우를 처리합니다.
+        const mentionID = req.body.mentions ? req.body.mentions.handle : null;
 
         // Webhook URL로 데이터 전송
         const webhookUrl = 'https://schat.smilegate.net/hooks/64e477d6892ec40472d71732/rjDH9MFQpPzFsjvQazM5764Co8CW2iQzZfFi6TqpuWud6NAE';
         const postData = {
             text: `게시자 ID: ${postID} 님이 파일명: ${postFile}에 댓글을 남겼습니다.`,
             attachments: [{
-                title: `@${mentionID} ${postContent}`,
+                // mentionID가 null이 아닌 경우에만 "@"를 붙여 표시합니다.
+                title: mentionID ? `@${mentionID} ${postContent}` : postContent,
                 title_link: "https://schat.smilegate.net",
                 text: postContent,
                 color: "#111111"
@@ -88,6 +90,7 @@ app.post('/webhook-ppool', async (req, res) => {
 
     res.status(200).send('OK');
 });
+
 
 
 

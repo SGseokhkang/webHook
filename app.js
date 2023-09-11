@@ -57,9 +57,12 @@ app.post('/webhook-ppool', async (req, res) => {
         const postID = req.body.triggered_by.handle;
         const postFile = req.body.file_name;
         const postContent = req.body.comment.map(item => item.text).join(' '); // 댓글 내용을 하나의 문자열로 합칩니다.
+        const postFileKey = req.body.file_key;
+        const postFileURL = `https://www.figma.com/file/${postFileKey}/${postFile}`
         
         // "mentionID"를 가져옵니다. mentionID가 null인 경우를 처리합니다.
         const mentionID = req.body.mentions ? req.body.mentions.handle : null;
+        console.log(mentionID);
 
         // Webhook URL로 데이터 전송
         const webhookUrl = 'https://schat.smilegate.net/hooks/64e477d6892ec40472d71732/rjDH9MFQpPzFsjvQazM5764Co8CW2iQzZfFi6TqpuWud6NAE';
@@ -69,7 +72,7 @@ app.post('/webhook-ppool', async (req, res) => {
                 // mentionID가 null이 아닌 경우에만 "@"를 붙여 표시합니다.
                 title: mentionID ? `@${mentionID} ${postContent}` : postContent,
                 title_link: "https://schat.smilegate.net",
-                text: postContent,
+                text: mentionID ? `@${mentionID} ${postContent} ${postFileURL}` : postContent,
                 color: "#111111"
             }]
         };

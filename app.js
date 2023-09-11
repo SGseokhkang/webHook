@@ -72,7 +72,7 @@ app.post('/webhook-ppool', async (req, res) => {
                 // mentionID가 null이 아닌 경우에만 "@"를 붙여 표시합니다.
                 // title: mentionID ? `@${mentionID} ${postContent}` : postContent,
                 // title_link: "https://schat.smilegate.net",
-                text: `${postContent} ${postFileURL}`,
+                text: `@here${postContent} ${postFileURL}`,
                 color: "#111111"
             }]
         };

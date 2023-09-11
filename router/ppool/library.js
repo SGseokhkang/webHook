@@ -1,5 +1,5 @@
 const express = require("express");
-const libraryController = require("../../controller/library");
+const libraryController = require("../../controller/ppool/library");
 const router = express.Router();
 
 router.post('/', libraryController.webhookLibrary);

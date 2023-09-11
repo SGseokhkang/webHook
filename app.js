@@ -70,8 +70,8 @@ app.post('/webhook-ppool', async (req, res) => {
             text: `게시자 ID: ${postID} 님이 파일명: ${postFile}에 댓글을 남겼습니다.`,
             attachments: [{
                 // mentionID가 null이 아닌 경우에만 "@"를 붙여 표시합니다.
-                title: mentionID ? `@${mentionID} ${postContent}` : postContent,
-                title_link: "https://schat.smilegate.net",
+                // title: mentionID ? `@${mentionID} ${postContent}` : postContent,
+                // title_link: "https://schat.smilegate.net",
                 text: `${postContent} ${postFileURL}`,
                 color: "#111111"
             }]

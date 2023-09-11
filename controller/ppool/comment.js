@@ -12,7 +12,7 @@ exports.webhookPpool = async (req, res) => {
         const postContent = req.body.comment.map(item => item.text).join(' ');
         const postFileKey = req.body.file_key;
         const postFileURL = `https://www.figma.com/file/${postFileKey}/${postFile}`
-        const mentionID = req.body.mentions ? req.body.mentions.handle : null;
+        // const mentionID = req.body.mentions ? req.body.mentions.handle : null;
 
         const webhookUrl = 'https://schat.smilegate.net/hooks/64e477d6892ec40472d71732/rjDH9MFQpPzFsjvQazM5764Co8CW2iQzZfFi6TqpuWud6NAE';
         const postData = {

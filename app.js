@@ -58,13 +58,14 @@ app.post('/webhook-ppool', async (req, res) => {
         const postID = req.body.triggered_by.handle;
         const postFile = req.body.file_name;
         const postContent = req.body.comment.map(item => item.text).join(' '); // 댓글 내용을 하나의 문자열로 합칩니다.
+        const mentionID = req.body.metions.handle;
 
         // Webhook URL로 데이터 전송
         const webhookUrl = 'https://schat.smilegate.net/hooks/64e477d6892ec40472d71732/rjDH9MFQpPzFsjvQazM5764Co8CW2iQzZfFi6TqpuWud6NAE';
         const postData = {
             text: `게시자 ID: ${postID} 님이 파일명: ${postFile}에 댓글을 남겼습니다.`,
             attachments: [{
-                title: postContent,
+                title: `@${mentionID} ${postContent}`,
                 title_link: "https://schat.smilegate.net",
                 text: postContent,
                 color: "#111111"

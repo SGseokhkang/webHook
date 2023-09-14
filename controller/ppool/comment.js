@@ -23,7 +23,7 @@ exports.webhookPpool = async (req, res) => {
         const postData = {
             text: `${postID} 님이 ${postFile}에 댓글을 남겼습니다.`,
             attachments: [{
-                text: `@here @강석환 ${postContent} ${postFileURL}`,
+                text: `${postContent} ${postFileURL}`,
                 color: "#111111"
             }]
         };

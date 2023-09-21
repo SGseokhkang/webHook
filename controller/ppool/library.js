@@ -6,21 +6,12 @@ exports.webhookLibrary = async (req, res) => {
     console.log('Figma 이벤트를 받았습니다:', req.body);
     latestLibraryData = req.body;
 
-    const libraryPostID = req.body.triggered_by.handle || "없음"; // 방어 코드 추가
-    const created_components = req.body.created_components[0];
-    const created_components_data = created_components.name;
-
-    const created_styles = req.body.created_styles[0]; // 방어 코드 추가
-    const created_styles_data = created_styles.name;
-    
-    const deleted_components = req.body.deleted_components[0]; // 방어 코드 추가
-    const deleted_components_data = deleted_components.name;
-
-    const modified_components = req.body.modified_components[0]; // 방어 코드 추가
-    const modified_components_data = modified_components.name;
-
-    const modified_styles = req.body.modified_styles[0]; // 방어 코드 추가
-    const modified_styles_data = modified_styles.name;
+    const libraryPostID = req.body.triggered_by.handle || "없음";
+    const created_components_data = req.body.created_components.length > 0 ? req.body.created_components[0].name : "없음";
+    const created_styles_data = req.body.created_styles.length > 0 ? req.body.created_styles[0].name : "없음";
+    const deleted_components_data = req.body.deleted_components.length > 0 ? req.body.deleted_components[0].name : "없음";
+    const modified_components_data = req.body.modified_components.length > 0 ? req.body.modified_components[0].name : "없음";
+    const modified_styles_data = req.body.modified_styles.length > 0 ? req.body.modified_styles[0].name : "없음";
 
 
 

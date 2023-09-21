@@ -6,12 +6,12 @@ exports.webhookLibrary = async (req, res) => {
     console.log('Figma 이벤트를 받았습니다:', req.body);
     latestLibraryData = req.body;
 
-    const libraryPostID = req.body.triggered_by.handle;
-    const created_components = req.body.created_components.name;
-    const created_styles = req.body.created_styles.name;
-    const deleted_components = deleted_styles.name;
-    const modified_components = req.body.modified_components.name;
-    const modified_styles = req.body.created_components.name;
+    const libraryPostID = req.body.triggered_by.handle || "없음"; // 방어 코드 추가
+    const created_components = req.body.created_components ? req.body.created_components.name : "없음"; // 방어 코드 추가
+    const created_styles = req.body.created_styles ? req.body.created_styles.name : "없음"; // 방어 코드 추가
+    const deleted_components = req.body.deleted_components ? req.body.deleted_components.name : "없음"; // 방어 코드 추가
+    const modified_components = req.body.modified_components ? req.body.modified_components.name : "없음"; // 방어 코드 추가
+    const modified_styles = req.body.modified_styles ? req.body.modified_styles.name : "없음"; // 방어 코드 추가
 
 
     // const webhookUrl = 'https://schat.smilegate.net/hooks/64e477d6892ec40472d71732/rjDH9MFQpPzFsjvQazM5764Co8CW2iQzZfFi6TqpuWud6NAE';

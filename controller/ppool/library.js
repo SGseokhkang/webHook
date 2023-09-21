@@ -7,13 +7,11 @@ exports.webhookLibrary = async (req, res) => {
     latestLibraryData = req.body;
 
     const libraryPostID = req.body.triggered_by.handle || "없음";
-    const created_components_data = req.body.created_components.length > 0 ? req.body.created_components[0].name : "없음";
-    const created_styles_data = req.body.created_styles.length > 0 ? req.body.created_styles[0].name : "없음";
-    const deleted_components_data = req.body.deleted_components.length > 0 ? req.body.deleted_components[0].name : "없음";
-    const modified_components_data = req.body.modified_components.length > 0 ? req.body.modified_components[0].name : "없음";
-    const modified_styles_data = req.body.modified_styles.length > 0 ? req.body.modified_styles[0].name : "없음";
-
-
+    const createdComponentsCount = req.body.created_components.length;
+    const createdStylesCount = req.body.created_styles.length;
+    const deletedComponentsCount = req.body.deleted_components.length;
+    const modifiedComponentsCount = req.body.modified_components.length;
+    const modifiedStylesCount = req.body.modified_styles.length;
 
     const webhookUrl = 'https://schat.smilegate.net/hooks/64e477d6892ec40472d71732/rjDH9MFQpPzFsjvQazM5764Co8CW2iQzZfFi6TqpuWud6NAE';
     const postData = {
@@ -21,11 +19,10 @@ exports.webhookLibrary = async (req, res) => {
         attachments: [{
             title: "라이브러리",
             title_link: "https://schat.smilegate.net",
-            text: `새로 만든 컴포넌트: ${created_components_data}\n새로 만든 스타일: ${created_styles_data}\n삭제 된 컴포넌트: ${deleted_components_data}\n수정 된 컴포넌트: ${modified_components_data}\n수정 된 스타일: ${modified_styles_data} `,
+            text: `새로 만든 컴포넌트 갯수: ${createdComponentsCount}\n새로 만든 스타일 갯수: ${createdStylesCount}\n삭제 된 컴포넌트 갯수: ${deletedComponentsCount}\n수정 된 컴포넌트 갯수: ${modifiedComponentsCount}\n수정 된 스타일 갯수: ${modifiedStylesCount} `,
             color: "#111111"
         }]
     };
-
 
     try {
         const response = await axios.post(webhookUrl, postData, {

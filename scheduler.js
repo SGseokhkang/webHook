@@ -20,5 +20,9 @@ const sendAutomaticPost = () => {
     });
 };
 
-// 매주 목요일 오후 3시에 실행
-cron.schedule('54 14 * * 3', sendAutomaticPost);
+// // 매주 목요일 오후 3시에 실행
+// cron.schedule('54 14 * * 3', sendAutomaticPost);
+
+
+// 10초마다 실행
+setInterval(sendAutomaticPost, 10000); // 10,000 milliseconds = 10 seconds

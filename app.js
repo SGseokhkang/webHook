@@ -41,7 +41,7 @@ app.listen(port, () => {
         });
     };
 
-    cron.schedule('00 15 * * 4', sendAutomaticPost);
+    cron.schedule('22 14 * * 3', sendAutomaticPost);
 
 });
 

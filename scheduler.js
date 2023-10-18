@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 const cron = require('node-cron');
 
 const sendAutomaticPost = () => {
-    fetch('https://port-0-webhook-6w1j2allyzyvdu.sel5.cloudtype.app//weekly-report', {
+    fetch('https://port-0-webhook-6w1j2allyzyvdu.sel5.cloudtype.app/weekly-report', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -21,4 +21,4 @@ const sendAutomaticPost = () => {
 };
 
 // 매주 목요일 오후 3시에 실행
-cron.schedule('50 14 * * 3', sendAutomaticPost);
+cron.schedule('52 14 * * 3', sendAutomaticPost);

@@ -17,6 +17,9 @@ app.get('/', (req, res) => {
 app.use('/webhook-library', libraryRouter); 
 app.use('/comment-ppool', ppoolRouter); 
 app.use('/weekly-report', stoveWeeklyReport);
+// 스케줄러 초기화
+require('./scheduler');
+
 
 app.listen(port, () => {
     console.log(`서버가 http://localhost:${port}에서 실행 중입니다.`);

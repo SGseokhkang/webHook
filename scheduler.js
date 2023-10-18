@@ -21,4 +21,4 @@ const sendAutomaticPost = () => {
 };
 
 // 매주 목요일 오후 3시에 실행
-cron.schedule('52 14 * * 3', sendAutomaticPost);
+cron.schedule('54 14 * * 3', sendAutomaticPost);

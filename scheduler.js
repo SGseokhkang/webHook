@@ -21,6 +21,6 @@ const sendAutomaticPost = () => {
 };
 
 // 매주 수요일 UTC 기준 오전 5시 46분에 실행
-cron.schedule('46 05 * * 2', sendAutomaticPost);
+cron.schedule('49 05 * * 2', sendAutomaticPost);
 
 

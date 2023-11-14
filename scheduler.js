@@ -20,7 +20,7 @@ const sendAutomaticPost = () => {
     });
 };
 
-cron.schedule('00 04,05 * * *', sendAutomaticPost);
+cron.schedule('00 07,08 * * *', sendAutomaticPost);
 
 
 

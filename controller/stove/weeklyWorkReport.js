@@ -4,7 +4,7 @@ exports.weeklyReport = async (req, res) => {
     const WEBHOOK_URL = 'https://schat.smilegate.net/hooks/652f5ed5aa06345cc50e5c86/Fiepqgxx9QFMSRpsu5LBxKMc2NbtEt4T5tPfy2KJ6NcNxbKo';
 
     const payload = {
-        text: "주간업무 써... 주시겠어요?"
+        text: "주간업무 써... 주시겠어요? https://wiki.smilegate.net/pages/viewpage.action?pageId=287303194"
     };
 
     try {

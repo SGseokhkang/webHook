@@ -11,7 +11,12 @@ const messages = [
     "이번 2023년 마니또 이벤트의 컨셉은... '데일리 미션 챌린지' 입니다. ",
     "1. 아래 링크에서 내 마니또를 추첨해 주세요. https://secretsantadesign2023.framer.website/ ",
     "2. 해당 링크에서 12/13일부터 매일 오전 10시에 미션 카드가 오픈됩니다. 카드를 오픈 후, 내 마니또에게 미션을 수행해 주세요.",
-    "잘 수행하시면,,, 추가 경품이 있을 수 있어요. 그럼, 행운을 빕니다...."
+    {
+        text: "잘 수행하시면,,, 추가 경품이 있을 수 있어요. 그럼, 행운을 빕니다....",
+        attachments: [{
+            image_url: "https://i.pinimg.com/originals/9a/66/ef/9a66efa4c5c32821de88dac94ad469a6.jpg"
+        }]
+    },
 ];
 let messageIndex = 0; // 현재 메시지 인덱스
 

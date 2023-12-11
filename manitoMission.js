@@ -4,23 +4,11 @@ const cron = require('node-cron');
 let count = 0; // 호출 횟수 추적
 let maxAttempts = 2; // 최대 시도 횟수 (두 번 실행되도록 2로 설정)
 
-// const dates = ['13', '14', '18', '19', '20', '21']; // 12월의 날짜들
-// let scheduledTasks = []; // cron 작업을 저장할 배열
-
-// dates.forEach(date => {
-//     let task = cron.schedule(`0 10 ${date} 12 *`, sendAutomaticPost, {
-//         scheduled: false,
-//         timezone: "Asia/Seoul"
-//     });
-//     scheduledTasks.push(task);
-//     task.start();
-// });
-
-const dates = ['11', '14', '18', '19', '20', '21']; // 12월의 날짜들
+const dates = ['13', '14', '18', '19', '20', '21']; // 12월의 날짜들
 let scheduledTasks = []; // cron 작업을 저장할 배열
 
 dates.forEach(date => {
-    let task = cron.schedule(`44 15 ${date} 12 *`, sendAutomaticPost, {
+    let task = cron.schedule(`0 10 ${date} 12 *`, sendAutomaticPost, {
         scheduled: false,
         timezone: "Asia/Seoul"
     });

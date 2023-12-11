@@ -2,9 +2,9 @@ const fetch = require('node-fetch');
 
 const messages = [
     {
-        text: "미션을 수행해주세요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+        text: "⭐️⭐️마니또의 미션이 도착했습니다. 오늘 내로 미션을 꼭 수행해주세요⭐️⭐️",
         attachments: [{
-            image_url: "https://i.pinimg.com/originals/1c/d1/d8/1cd1d87bbf871f500f7ee7c3ba85b58a.jpg"
+            image_url: "https://i.pinimg.com/originals/5d/3f/79/5d3f79cf77ef318412a20e50ec8afbff.jpg"
         }]
     }
 ];

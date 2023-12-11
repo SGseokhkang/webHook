@@ -1,16 +1,15 @@
 const fetch = require('node-fetch');
 const cron = require('node-cron');
 
-let count = 0; // 호출 횟수를 추적하는 변수
+let count = 0; // 호출 횟수 추적
 
 const sendAutomaticPost = () => {
     count++;
-    console.log('Function called', count, 'times');
+    console.log(`Function called ${count} times`);
 
-    // 함수를 5회 호출한 후 cron 작업 중지
     if (count >= 5) {
-        scheduledTask.stop();
-        console.log('Cron job stopped after 5 calls');
+        console.log('Stopping cron job after 5 calls');
+        scheduledTask.stop(); // 5회 호출 후 cron 작업 중지
     }
 
     fetch('https://port-0-webhook-6w1j2allyzyvdu.sel5.cloudtype.app/manitoBot', {
@@ -31,5 +30,5 @@ const sendAutomaticPost = () => {
     });
 };
 
-// 10초 간격으로 sendAutomaticPost 함수 호출
+// cron 작업 설정
 const scheduledTask = cron.schedule('*/10 * * * * *', sendAutomaticPost);

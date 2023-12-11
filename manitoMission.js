@@ -20,7 +20,7 @@ const dates = ['11', '14', '18', '19', '20', '21']; // 12월의 날짜들
 let scheduledTasks = []; // cron 작업을 저장할 배열
 
 dates.forEach(date => {
-    let task = cron.schedule(`45 15 ${date} 12 *`, sendAutomaticPost, {
+    let task = cron.schedule(`44 15 ${date} 12 *`, sendAutomaticPost, {
         scheduled: false,
         timezone: "Asia/Seoul"
     });

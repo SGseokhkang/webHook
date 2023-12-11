@@ -28,6 +28,7 @@ app.use('/manitoBotMission', manitoBotMission);
 // 스케줄러 초기화
 require('./scheduler');
 require('./manito');
+require('./manitoMission');
 
 
 app.listen(port, () => {

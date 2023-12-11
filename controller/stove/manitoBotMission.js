@@ -1,6 +1,5 @@
 const fetch = require('node-fetch');
 
-// 첫 번째 텍스트 메시지만 남김
 const messages = [
     {
         text: "미션을 수행해주세요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
@@ -11,8 +10,9 @@ const messages = [
 ];
 
 let messageIndex = 0; // 현재 메시지 인덱스
+let sendCount = 0; // 메시지 전송 횟수 추적
+const maxAttempts = 2; // 최대 전송 횟수 (2번으로 설정)
 
-// 유효성 검사 함수
 function isValidMessage(message) {
     return typeof message === 'object' && 'text' in message;
 }
@@ -21,9 +21,9 @@ exports.manitoBotMission = async (req, res) => {
     const WEBHOOK_URL = 'https://schat.smilegate.net/hooks/6572bc5a8c41792fdaf04855/XXitQ8me2SazHeDz9EyzkwojtuFgE8QvPBNXnGPp4YSJpWzZ';
 
     // 모든 메시지가 전송되었는지 확인
-    if (messageIndex >= messages.length) {
-        console.log('All messages have been sent.');
-        res.status(200).send({ message: "All messages have been sent." });
+    if (sendCount >= maxAttempts) {
+        console.log('All messages have been sent the maximum number of times.');
+        res.status(200).send({ message: "All messages have been sent the maximum number of times." });
         return;
     }
 
@@ -35,9 +35,6 @@ exports.manitoBotMission = async (req, res) => {
         res.status(400).send({ message: "Invalid message format" });
         return;
     }
-
-    // 다음 메시지를 위한 인덱스 업데이트
-    messageIndex = (messageIndex + 1) % messages.length;
 
     try {
         const response = await fetch(WEBHOOK_URL, {
@@ -56,4 +53,8 @@ exports.manitoBotMission = async (req, res) => {
         console.error('Error sending message:', error);
         res.status(500).send({ message: "Error sending message" });
     }
+
+    // 다음 메시지 전송을 위한 인덱스 및 카운트 업데이트
+    sendCount++;
+    messageIndex = (messageIndex + 1) % messages.length;
 };

@@ -5,7 +5,7 @@ let count = 0; // 호출 횟수 추적
 let maxAttempts = 2; // 최대 시도 횟수 (한 번만 실행되므로 1로 설정)
 
 // 한국시간 기준 12월 11일 오후 3시 10분에 시작하는 cron 작업 설정
-let startTask = cron.schedule('34 15 11 12 *', () => {
+let startTask = cron.schedule('37 15 11 12 *', () => {
     sendAutomaticPost();
 }, {
     scheduled: false,

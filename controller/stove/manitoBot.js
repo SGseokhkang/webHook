@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
 // 메시지 목록 정의
-const messages = ["테스트 1", "테스트 2", "테스트 3", "테스트 4", "테스트 5"];
+const messages = ["안녕하세요!!! 이번 마니또 TF에 새롭게 발령받은 산타마니또입니다!!! 소리질러!!!!!!!", "이번 2023년 마니또 이벤트의 컨셉은... '데일리 미션 챌린지' 입니다. ", "매일 매일 랜덤으로 주어지는 미션카드를 가지고 수행해보세요", "ㅁㄴㅇㅁㄴㅇ", "테스트 5"];
 let messageIndex = 0; // 현재 메시지 인덱스
 
 exports.manitoBot = async (req, res) => {

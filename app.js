@@ -1,11 +1,15 @@
 const express = require("express");
-const libraryRouter = require("./router/ppool/library");
-const ppoolRouter = require("./router/ppool/comment");
-const stoveWeeklyReport = require("./router/ppool/weeklyWorkReport");
 const path = require("path");  // <-- 이 부분 추가
 const app = express();
 const port = 3000;
 const cron = require('node-cron');
+
+// 라우터
+const libraryRouter = require("./router/ppool/library");
+const ppoolRouter = require("./router/ppool/comment");
+const stoveWeeklyReport = require("./router/ppool/weeklyWorkReport");
+const manitoBot = require("./router/stove/manitoBot");
+
 
 app.use(express.json());
 
@@ -17,6 +21,8 @@ app.get('/', (req, res) => {
 app.use('/webhook-library', libraryRouter); 
 app.use('/comment-ppool', ppoolRouter); 
 app.use('/weekly-report', stoveWeeklyReport);
+app.use('/manitoBot', manitoBot);
+
 // 스케줄러 초기화
 require('./scheduler');
 

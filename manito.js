@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 const cron = require('node-cron');
 
 const sendAutomaticPost = () => {
-    fetch('https://port-0-webhook-6w1j2allyzyvdu.sel5.cloudtype.app/weekly-report', {
+    fetch('https://port-0-webhook-6w1j2allyzyvdu.sel5.cloudtype.app/manitoBot', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -20,8 +20,8 @@ const sendAutomaticPost = () => {
     });
 };
 
-cron.schedule('00 07,08 * * 4', sendAutomaticPost);
-
+// cron.schedule('00 07,08 * * 4', sendAutomaticPost);
+cron.schedule('*/10 * * * * *', sendAutomaticPost);
 
 
 // // 10초마다 실행

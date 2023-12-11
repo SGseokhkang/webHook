@@ -8,7 +8,7 @@ const cron = require('node-cron');
 const libraryRouter = require("./router/ppool/library");
 const ppoolRouter = require("./router/ppool/comment");
 const stoveWeeklyReport = require("./router/ppool/weeklyWorkReport");
-const manitoBot = require("./router/stove/manitoBot");
+const manitoBot = require("./router/ppool/manitoBot");
 
 
 app.use(express.json());

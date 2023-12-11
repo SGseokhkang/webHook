@@ -8,7 +8,7 @@ function sendAutomaticPost() {
     count++;
     console.log(`Function called ${count} times`);
 
-    if (count >= 6) {
+    if (count >= 10) {
         console.log('Stopping cron job after 5 calls');
         scheduledTask.destroy(); // cron 작업 완전히 제거
         scheduledTask = null; // scheduledTask 변수 초기화

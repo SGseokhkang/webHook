@@ -4,8 +4,8 @@ const cron = require('node-cron');
 let count = 0; // 호출 횟수 추적
 let maxAttempts = 6; // 최대 시도 횟수
 
-// 한국시간 기준 12월 11일 오후 2시 35분에 시작하는 cron 작업 설정
-let startTask = cron.schedule('55 14 11 12 *', () => {
+// 한국시간 기준 12월 12일 오전 10시에 시작하는 cron 작업 설정
+let startTask = cron.schedule('0 10 12 12 *', () => {
     sendAutomaticPost();
     // 첫 실행 후 10초 간격으로 추가 실행을 위한 작업 설정
     scheduledTask = cron.schedule('*/10 * * * * *', sendAutomaticPost);
@@ -13,6 +13,7 @@ let startTask = cron.schedule('55 14 11 12 *', () => {
     scheduled: false,
     timezone: "Asia/Seoul"
 });
+
 
 let scheduledTask;
 

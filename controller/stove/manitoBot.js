@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
-exports.weeklyReport = async (req, res) => {
-    const WEBHOOK_URL = 'https://schat.smilegate.net/hooks/652f5ed5aa06345cc50e5c86/Fiepqgxx9QFMSRpsu5LBxKMc2NbtEt4T5tPfy2KJ6NcNxbKo';
+exports.manitoBot = async (req, res) => {
+    const WEBHOOK_URL = 'https://schat.smilegate.net/hooks/6572bc5a8c41792fdaf04855/XXitQ8me2SazHeDz9EyzkwojtuFgE8QvPBNXnGPp4YSJpWzZ';
 
     const payload = {
         text: "마니또 테스트"

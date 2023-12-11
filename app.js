@@ -9,6 +9,7 @@ const libraryRouter = require("./router/ppool/library");
 const ppoolRouter = require("./router/ppool/comment");
 const stoveWeeklyReport = require("./router/ppool/weeklyWorkReport");
 const manitoBot = require("./router/ppool/manitoBot");
+const manitoBotMission = require("./router/ppool/manitoBotMission");
 
 
 app.use(express.json());
@@ -22,6 +23,7 @@ app.use('/webhook-library', libraryRouter);
 app.use('/comment-ppool', ppoolRouter); 
 app.use('/weekly-report', stoveWeeklyReport);
 app.use('/manitoBot', manitoBot);
+app.use('/manitoBotMission', manitoBotMission);
 
 // 스케줄러 초기화
 require('./scheduler');
